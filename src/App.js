@@ -1,24 +1,28 @@
 import logo from './logo.svg';
+import Dashboard from './dashboard';
 import './App.css';
+import {Switch, BrowserRouter, Route, Redirect } from 'react-router-dom';
 
+import { Provider } from "react-redux";
+import { createStore,combineReducers } from "redux";
+import userReducer from '../src/redux/reducers/users';
+
+const rootReducer=combineReducers({
+  users:userReducer
+});
+
+const store= createStore(rootReducer,{});
+ 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+    <BrowserRouter>
+    <Switch>
+      <Route path="/dashboard" component={Dashboard}/>
+      <Redirect from ="/" to="/dashboard"/>
+    </Switch>
+    </BrowserRouter>
+    </Provider>
   );
 }
 
