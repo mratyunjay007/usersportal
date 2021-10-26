@@ -1,6 +1,5 @@
-import logo from './logo.svg';
+
 import Dashboard from './dashboard';
-import './App.css';
 import {Switch, BrowserRouter, Route, Redirect } from 'react-router-dom';
 
 import { Provider } from "react-redux";
