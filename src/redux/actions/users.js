@@ -3,17 +3,17 @@ import { deleteData, getData, postData, putData } from "../../lib"
 
 export const getUsers=(dispatch)=>((payload)=>{
    return  getData(USERS_LIST)
-    .then(r=>{  console.log("resposne",r); return r.json();})
-    .then(r=>{console.log("resposne",r);
+    .then(r=>{ return r.json();})
+    .then(r=>{
         dispatch({type:"ADD_USERS", payload:r});
         return true;
     })
-    .catch(e=> console.log("error"));
+    .catch(e=> console.log("get list error",e));
 })
 
 export const createUser=(dispatch)=>((payload)=>{
     return postData(USERS_LIST,payload)
-    .then(r=> {console.log("response",r);
+    .then(r=> {
         if(r.status===201){
         window.alert("new user added");
         dispatch({type:"ADD_NEW_USER",payload});
@@ -23,9 +23,9 @@ export const createUser=(dispatch)=>((payload)=>{
 }).catch(e=> {console.log(" create user error"); window.alert("operation failed , please try again")});
 })
 
-export const updateUser=(dispatch)=>((payload)=>{ console.log("pauload",payload);
+export const updateUser=(dispatch)=>((payload)=>{ 
    return putData(USERS_LIST,payload)
-    .then(r=>{ console.log("response",r);
+    .then(r=>{ 
         if(r.status===200){
          window.alert("user updated");
           dispatch({type:"UPDATE_USER", payload});
@@ -36,7 +36,7 @@ export const updateUser=(dispatch)=>((payload)=>{ console.log("pauload",payload)
 
 export const deleteUser=(dispatch)=>((payload)=>{
    return deleteData(SECOND_USER_API,payload) 
-        .then(r=> { console.log("response",r);
+        .then(r=> { 
         if(r.status===204){
             window.alert("user deleted");
             dispatch({ type: "DELETE_USER", payload});
