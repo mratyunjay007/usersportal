@@ -72,10 +72,11 @@ class UsersList extends React.Component {
     }
 
     performOperation = () => {
-        const { operation, user } = this.state;
+        const { operation, user,first_name,last_name,email,avatar } = this.state;
+        if(first_name && last_name && email && avatar){
         const payload = { first_name: this.state.first_name, last_name: this.state.last_name, email: this.state.email,avatar:this.state.avatar };
 
-        
+
         this.setState({loader:true});
         if (operation === "edit") {
             payload.id = user.id;
@@ -84,6 +85,9 @@ class UsersList extends React.Component {
             this.props.createUser(payload).then(this.setState({loader:false}));
         }
         this.handleClose();
+    }else{
+        window.alert("Please fill all fields including image");
+    }
     }
 
     render() {
@@ -108,9 +112,9 @@ class UsersList extends React.Component {
                         <div style={{ display: 'flex', flexDirection: 'column', marginTop: '10%', backgroundColor: "#fff", borderRadius: 10, width: 400, padding: 20 }}>
                             <div style={{ backgroundColor: "#fff", display: 'flex', justifyContent: 'center', alignItems: 'center', height: 300, }}>
                                 <div className={classes.imgContainer} onClick={() => this.uploadDp.click()}>
-                                    <img className={classes.imageStyle} src={avatar?avatar: Users1} alt="" crossOrigin="anonymous" />
+                                    <img className={classes.imageStyle} src={avatar?avatar: ''} alt="" crossOrigin="anonymous" />
                                     <div className={classes.addIcon} >
-                                        <p style={{ color: "#fff", fontWeight: '400' }}>Update Channel Icon</p>
+                                        <p style={{ color: "#fff", fontWeight: '400' }}>Update User Image</p>
                                     </div>
                                     <input
                                         accept="image/*"
