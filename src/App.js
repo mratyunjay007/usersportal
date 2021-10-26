@@ -17,8 +17,7 @@ function App() {
     <Provider store={store}>
     <BrowserRouter>
     <Switch>
-      <Route path="/dashboard" component={Dashboard}/>
-      <Redirect from ="/" to="/dashboard"/>
+      <Route path="/" component={Dashboard}/>
     </Switch>
     </BrowserRouter>
     </Provider>
